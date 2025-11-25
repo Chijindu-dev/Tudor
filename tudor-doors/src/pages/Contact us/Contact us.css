@@ -1,0 +1,285 @@
+:root{
+  --bg:#f3f6f7;
+  --card:#ffffff;
+  --muted:#666b6f;
+  --accent:#111111;
+  --accent-2:#202428;
+  --accent-soft:#0f1720;
+  --primary: #C7A86A;
+  --primary-dark: #b1915f;
+}
+
+html,body,#root{height:100%}
+.contact-page{
+  background: var(--soft-bg, #f3f6f7);
+  min-height:100vh;
+  padding:48px 20px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.contact-wrapper{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  text-align:center;
+  padding:20px;
+}
+
+.contact-kicker{
+  font-size:12px;
+  letter-spacing:2px;
+  color: var(--muted, #666b6f);
+  margin-bottom:14px;
+  font-weight:600;
+}
+
+.contact-title{
+  font-size:36px;
+  margin:0 0 12px;
+  color: var(--primary);
+  font-weight:700;
+  line-height:1.05;
+}
+
+.contact-lead{
+  color: var(--muted, #666b6f);
+  max-width:760px;
+  margin:0 auto 28px;
+}
+
+.contact-card{
+  background: var(--white, #ffffff);
+  box-shadow:0 18px 40px rgba(15,20,25,0.06);
+  border-radius:10px;
+  padding:40px;
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:36px;
+  align-items:start;
+}
+
+/* Form */
+.contact-form{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  text-align:left;
+}
+
+.contact-form label{font-size:13px;color:var(--muted, #666b6f)}
+.label{display:block;margin-bottom:8px;font-weight:600;font-size:12px;color:var(--muted, #666b6f)}
+
+.contact-form input,
+.contact-form textarea{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid #e6e9eb;
+  border-radius:6px;
+  font-size:14px;
+  color:var(--dark, #111);
+  background:var(--white, #fff);
+  box-shadow:none;
+  transition:box-shadow .18s, border-color .18s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+  outline:none;
+  border-color:#cfcfcf;
+  box-shadow:0 6px 20px rgba(16,24,32,0.06);
+}
+
+.checkbox-row{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--muted-text, #666b6f);
+  margin-top: 6px;
+}
+
+/* keep native checkbox appearance */
+.checkbox-row input[type="checkbox"]{
+  width: auto;
+  height: auto;
+  display: flex;
+  
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: checkbox;
+  appearance: checkbox;
+  cursor: pointer;
+}
+
+/* label text */
+.checkbox-row span{
+  line-height: 1.2;
+  font-size: 13px;
+}
+.checkbox-row span a{
+  color: var(--primary, #C7A86A);
+  text-decoration: none;
+}
+/* remove any custom checkbox pseudo-element rules if present */
+.submit-btn{
+  margin-top:8px;
+  padding:12px 18px;
+  background:var(--primary, #C7A86A);
+  color:var(--primary-contrast, #fff);
+  border:none;
+  border-radius:6px;
+  font-weight:700;
+  cursor:pointer;
+  transition:transform .14s ease,opacity .14s ease;
+  box-shadow:0 6px 18px rgba(16,24,32,0.12);
+}
+
+.submit-btn:hover{transform:translateY(-2px); opacity:0.96; background-color:var(--primary-dark) ;color:var(--primary-contrast, #fff);}
+
+/* form status */
+.form-status{margin-top:12px;font-size:14px}
+.form-status.ok{color:green}
+.form-status.err{color:#c0392b}
+.form-status.busy{color:var(--muted, #666b6f)}
+
+/* Right column info */
+.contact-info{padding-left:6px;text-align:left}
+
+.contact-info h3{
+  margin-top:0;
+  color:var(--accent-dark, #4B3B32);
+  font-size:16px;
+  margin-bottom:8px;
+  font-weight:700
+}
+.benefits{list-style:none;padding:0;margin:0 0 18px 0}
+.benefits li{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin-bottom:10px;
+  color:var(--muted, #666b6f);
+  font-size:13px; /* tightened for compact layout */
+}
+.small-icon{
+  color:var(--accent-dark, #4B3B32);
+  margin-top:4px;
+  font-size:14px; /* slightly smaller to balance text */
+}
+
+/* locations - two-column grid so boxes sit side-by-side */
+.contact-locations{
+  margin-top:8px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 24px;
+  align-items: start;
+}
+
+/* location row */
+.loc{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+}
+
+/* icon box: slightly smaller to fit text */
+.loc-icon{
+  width:30px;
+  height:30px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#f1f4f5;
+  border-radius:8px;
+  padding:6px;
+  color:var(--accent-dark, #4B3B32);
+  font-size:16px; /* adjusted to fit */
+}
+
+/* location text sizes adjusted for fit */
+.loc strong{
+  display:block;
+  font-size:13px;
+  color:var(--dark, #111);
+  margin-bottom:6px;
+}
+.loc p{
+  margin:0;
+  color:var(--muted, #666b6f);
+  font-size:13px;
+  line-height:1.35;
+}
+
+/* quick contact spans full width under locations */
+.quick-contact{
+  grid-column: 1 / -1;
+  margin-top:10px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  color:var(--muted, #666b6f);
+  font-size:14px;
+}
+
+.contact-info .quick-contact{
+  margin-top:100px;
+}
+
+/* responsive: stack locations on small screens */
+@media (max-width:980px){
+  .contact-card{grid-template-columns:1fr; padding:28px}
+  .contact-info{padding-left:0}
+  .contact-title{font-size:30px}
+
+  .contact-locations{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width:560px){
+  .contact-wrapper{padding:8px}
+  .contact-card{padding:20px}
+  .contact-title{font-size:24px}
+}
+
+/* Hero Section */
+.contact-hero {
+  height: 300px;
+  background: url('../../assets/contact\ us.webp') no-repeat center center;
+  background-size: cover;
+  position: relative;
+}
+
+.contact-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.contact-hero-content {
+  color: var(--white);
+  z-index: 1;
+}
+
+.contact-hero-content h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: white;
+}
+
+
+/* Adjust existing contact page padding */
+.contact-page {
+  padding-top: 80px;
+}

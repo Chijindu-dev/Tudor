@@ -1,0 +1,216 @@
+/* 🌈 Root Colors */
+:root {
+  --page-bg: var(--page-bg, #f6f5f3);
+  --card-bg: var(--card, #ffffff);
+  --muted: var(--muted, #7a7f83);
+  --accent: var(--primary, #C7A86A);
+  --text: var(--text, #111);
+  --white: #ffffff;
+}
+
+/* 🧱 Base Page */
+.team-page {
+  background: var(--page-bg);
+  padding: 56px 20px 120px;
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 🦸 Hero Section */
+.team-hero {
+  max-width: 1080px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+.team-hero h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  line-height: 1.1;
+  margin: 0 0 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.team-hero h1 em { 
+  font-style: italic; 
+  color: var(--text); 
+}
+
+.team-hero .lead {
+  color: var(--muted);
+  margin: 0 auto 22px;
+  max-width: 760px;
+  font-size: clamp(14px, 1.5vw, 16px);
+}
+
+/* 🖼️ Hero Banner */
+.about-hero {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background: url('../../assets/team.jpg') center/cover no-repeat; /* Replace with your image path */
+  display: flex;
+  align-items: center !important;
+  justify-content: center;
+}
+
+.about-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  /* text-align: center; */
+  color: #fff;
+}
+
+.hero-contents h1 {
+  font-size: clamp(28px, 5vw, 46px);
+  font-weight: 700;
+  margin-bottom: 8px;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.hero-content p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 768px) {
+  .about-hero {
+    height: 200px;
+  }
+  .hero-content h1 {
+    font-size: 32px;
+  }
+  .hero-content p {
+    font-size: 12px;
+  }
+}
+
+/* 🔘 Filter Buttons */
+.team-filters {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid rgba(16,20,24,0.06);
+  padding: 8px 14px;
+  border-radius: 18px;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .14s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 6px 18px rgba(16,20,24,0.04);
+}
+
+/* 🧩 Team Grid */
+.team-grid-section {
+  max-width: 1180px;
+  margin: 32px auto 0;
+  padding: 0 18px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 2vw, 22px);
+}
+
+/* 🪪 Card */
+.team-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 3 / 4;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+/* 📸 Image + Overlay Text */
+.card-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.team-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.card-name {
+  font-size: 16px;
+  margin: 0;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.card-role {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* 📱 Responsive Breakpoints */
+@media (max-width: 1100px) {
+  .team-grid { grid-template-columns: repeat(3, 1fr); }
+  .team-card { min-height: 280px; }
+}
+
+@media (max-width: 800px) {
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-card { min-height: 260px; }
+  .card-meta { padding: 16px; }
+  .team-hero-inner h1 { font-size: clamp(22px, 5vw, 36px); }
+}
+
+@media (max-width: 480px) {
+  .team-grid { grid-template-columns: 1fr; }
+  .team-card { min-height: 300px; }
+  .team-avatar { border-radius: 8px; }
+  .team-hero-banner { height: 160px; margin-bottom: 20px; }
+  .team-hero-inner h1 { font-size: 22px; }
+  .team-hero .lead { font-size: 14px; }
+}
