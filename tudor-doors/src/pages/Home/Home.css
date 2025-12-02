@@ -536,12 +536,7 @@
   }
 }
 
-.client-voices-wrapper {
-  position: relative; /* or remove position completely */
-  margin-top: 0;
-  padding: 80px 0;
-  background: var(--soft-bg, #f8f9fa);
-}
+
 
 
 /* Ensure WhatsApp button stays on top */
@@ -550,56 +545,8 @@
   z-index: 1000;
 }
 
-/* Client Voices (inline styling to match screenshot) */
-.client-voices{ background: var(--white, #ffffff); padding: 56px 0; }
-.client-container{ max-width:1180px; margin:0 auto; padding:0 20px; }
-.client-header h2{ font-size:28px; margin:0 0 8px; color:#C7A86A !important; font-weight:700; text-align:center; }
-.client-header p{ margin:0 0 22px; color:var(--muted, #666); font-size:14px; text-align:left; }
-
-/* slider wrapper */
-.client-slider{ 
-  max-width:100%;
-   margin-top:12px;
-   }
-   /* Client Voices responsiveness on small screens */
-@media (max-width: 768px) {
-  .testimonial-content {
-    grid-template-columns: 1fr !important;
-    gap: 18px;
-  }
-
-  .author-card {
-    flex-direction: row;
-    width: 100%;
-  }
-
-  .quote-area blockquote {
-    font-size: 15px;
-    line-height: 1.5;
-  }
-}
-
-@media (max-width: 480px) {
-  .author-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .profile-image {
-    width: 64px;
-    height: 64px;
-  }
-
-  .author-meta h4 {
-    font-size: 14px;
-  }
-
-  .author-meta .position,
-  .author-meta .company {
-    font-size: 12px;
-  }
-}
-
+/* Client Voices (inline styling to match screenshot) *
+.
 
 /* each slide layout: left quote, right author card */
 .testimonial-slide{ padding:8px 12px; outline:none; }
@@ -627,48 +574,6 @@
 .slick-prev, .slick-next{ width:36px; height:36px; border-radius:50%; background:var(--white, #fff); box-shadow:0 6px 18px rgba(16,24,32,0.06); }
 .slick-prev:before, .slick-next:before{ color:#222; font-size:14px; }
 
-/* responsive adjustments */
-@media (max-width: 980px){
-  .testimonial-content{ grid-template-columns:1fr; }
-  .client-header h2, .client-header p{ text-align:center; }
-  .slick-dots{ justify-content:center; }
-  .author-card{ justify-content:flex-start; }
-}
-@media (max-width:520px){
-  .profile-image{ width:64px; height:64px; flex:0 0 64px; }
-  .quote-area blockquote{ font-size:16px; }
-}
-
-/* --- Client Voices (new design matching image) --- */
-.client-voices {
-  background: var(--white, #fff);
-  padding: 64px 0 84px;
-  color: var(--dark, #111);
-}
-.client-container {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-.client-header .eyebrow {
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: var(--muted, #9aa0a6);
-  margin-bottom: 10px;
-}
-.client-header h2 {
-  font-size: 34px;
-  margin: 0 0 30px;
-  font-weight: 700;
-  color: var(--text, #0d1b21);
-  line-height: 1.05;
-}
-
-/* slider wrapper */
-.client-slider { position: relative; }
-
-/* slide base */
-.testimonial-slide { padding: 12px 6px; outline: none; }
 
 /* card */
 .cv-card {
@@ -707,8 +612,8 @@
 .cv-footer { margin-top: 16px; display:flex; align-items:center; justify-content:flex-start; }
 .cv-author { display:flex; gap:12px; align-items:center; }
 .cv-author img {
-  width:48px;
-  height:48px;
+  width:60px;
+  height:60px;
   border-radius:50%;
   object-fit:cover;
   border:2px solid rgba(0,0,0,0.04);
@@ -784,3 +689,32 @@
 }
 
 /* end of client slider styles */
+
+
+/* ------------------------------------------------------
+   iPhone XR / iOS Safari Slick Carousel Rendering Fix
+   ------------------------------------------------------ */
+@supports (-webkit-touch-callout: none) {
+
+  /* force slick to use GPU layer (fixes shrinking slides) */
+  .slick-slider {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* stops slides from collapsing to 0px on initial load */
+  .slick-slide {
+    min-height: 1px !important;
+  }
+
+  /* forces proper layout calculation on iOS */
+  .slick-track {
+    display: flex !important;
+  }
+
+  /* fixes "stacked" slides appearing squashed on first load */
+  .slick-slide > div {
+    display: block !important;
+  }
+}

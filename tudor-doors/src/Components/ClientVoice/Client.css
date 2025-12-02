@@ -1,25 +1,128 @@
+:root {
+  --primary: #C7A86A;
+  --white: #fff;
+  --muted: #555;
+  --soft-bg: #F5F7FA;
+  --dark: #111;
+  --active-dot: #C7A86A;
+  --inactive-dot: #bbb;
+}
 
+.client-voices {
+  background: var(--white);
+  padding: 80px 20px;
+}
 
-.profile-image {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 25px;
-  border-radius: 50%;
+.client-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.client-header .eyebrow {
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.client-header h2 {
+  font-size: 32px;
+  color: var(--primary);
+  margin-bottom: 40px;
+}
+
+.slider-wrapper {
   overflow: hidden;
-  border: 3px solid var(--primary, #C7A86A);
-}
-
-.profile-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
-.testimonial-content {
+.slider-inner {
+  display: flex;
+  transition: transform 0.6s ease-in-out; /* Smooth transition for sliding */
+}
+
+.testimonial-card {
+  flex: 0 0 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.testimonial-card .quote blockquote {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--dark);
+  margin-bottom: 24px;
+}
+
+.testimonial-card .author {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* ...existing testimonial-content styles... */
 }
 
-/* ...existing code... */
+.author-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.author-meta strong {
+  display: block;
+  font-size: 16px;
+  color: var(--dark);
+}
+
+.author-meta span {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.client-count {
+  margin-top: 30px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Dots for Slider */
+.dots-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  margin: 0 8px;
+  border-radius: 50%;
+  background-color: var(--inactive-dot);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: var(--active-dot);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .client-header h2 {
+    font-size: 26px;
+  }
+  .testimonial-card .quote blockquote {
+    font-size: 16px;
+  }
+  .author-img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .client-voices {
+    padding: 60px 10px;
+  }
+}

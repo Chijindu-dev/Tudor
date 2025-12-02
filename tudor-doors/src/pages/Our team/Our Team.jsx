@@ -5,7 +5,7 @@ import profile2 from "../../assets/madam.png";
 import profile3 from "../../assets/favour.png"; 
 import profile4 from "../../assets/super.png" ;
 import profile5 from "../../assets/double.png"
-import profile6 from "../../assets/bro izu.png";
+import profile6 from "../../assets/bro izu.webp";
 import "./Our Team.css";
 
 

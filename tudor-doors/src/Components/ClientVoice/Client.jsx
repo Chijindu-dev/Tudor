@@ -1,91 +1,109 @@
-import React from 'react';
-import Slider from 'react-slick';
-import { motion } from 'framer-motion';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import './Client.css';
+import React, { useState, useEffect, useRef } from "react";
 
-// Import profile images
-import profile1 from '../../assets/profile1.jpg';
-import profile2 from '../../assets/profile2.jpg';
-import profile3 from '../../assets/profile3.jpg';
 
-const ClientVoices = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    arrows: true,
-    pauseOnHover: false
-  };
+import profile1 from "../../assets/female.png";
+import profile2 from "../../assets/male.png";
+import profile3 from "../../assets/male.png";
+import profile4 from "../../assets/female2.png";
+import "./Client.css";
 
   const testimonials = [
-    {
-      quote: "Their commitment to quality and attention to detail is unmatched",
-      author: "William Parker",
-      position: "Project Manager",
-      company: "Greentech Solutions",
-      image: profile1
-    },
-    {
-      quote: "We've worked with many contractors, but Tudor Doors stands out for their professionalism",
-      author: "Sarah Johnson",
-      position: "Operations Director",
-      company: "Metro Development",
-      image: profile2
-    },
-    {
-      quote: "Excellent service and outstanding results every time",
-      author: "Michael Chang",
-      position: "Property Developer",
-      company: "Urban Spaces Ltd",
-      image: profile3
-    }
+    { quote: "Your doors elevated our entire project. Reliable, durable, and premium.", author: "Mary Onuoha", position: "Supervisor ", company: "Octo5 Holdings", image: profile4 },
+    { quote: "These doors added luxury and elegance to our hotel rooms. Zero complaints, only praise", author: "Abimbola Opeyemi", position: "Contractor", company: "Adron Homes", image: profile1 },
+    { quote: "Our clients were impressed. Installation was smooth and quality is top-notch.", author: "Silas Sehoole", position: "Structural Engineer", company: "Mixta Africa", image: profile2 },
+    { quote: "Strong, stylish, and secure. The perfect touch needed for our facility upgrade.", author: "Yemi Shola", position: "Architect", company: "VAVA Furniture", image: profile3 },
+    { quote: "Thank you TDL! I feel absolutely safe and secure in my new home, the beauty of the doors is also a plus", author: "Christanna", position: "New Home Owner", company:"", image: profile3 },
+
+
   ];
+
+const ClientVoices = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const sliderRef = useRef(null);
+
+ const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentIndex((prevIndex) => {
+      // Calculate next index
+      let nextIndex = prevIndex + direction;
+
+      // Change direction if we hit either end
+      if (nextIndex >= testimonials.length) {
+        nextIndex = testimonials.length - 2; // step back
+        setDirection(-1);
+      } else if (nextIndex < 0) {
+        nextIndex = 1; // step forward
+        setDirection(1);
+      }
+
+      return nextIndex;
+    });
+  }, 4000);
+
+  return () => clearInterval(interval);
+}, [direction]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  //   }, 4000);
+  //   return () => clearInterval(interval);
+  // }, []);
+
+
+  useEffect(() => {
+    if (sliderRef.current) {
+      sliderRef.current.style.transition = "transform 0.6s ease-in-out"; 
+      sliderRef.current.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+  }, [currentIndex]);
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
 
   return (
     <section className="client-voices">
-      <div className="container">
-        <motion.div 
-          className="section-header"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2>Client Voices of Satisfaction</h2>
-          <p>Here's what our clients say about our services. We're always committed to professionalism and performance.</p>
-        </motion.div>
-
-        <motion.div 
-          className="testimonials-slider"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <Slider {...settings}>
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="testimonial-slide">
-                <div className="testimonial-content">
-                  <div className="profile-image">
-                    <img src={testimonial.image} alt={testimonial.author} />
-                  </div>
+      <div className="client-container">
+        <div className="client-header">
+          <p className="eyebrow">TESTIMONIALS</p>
+          <h2>What Our Clients Say!</h2>
+        </div>
+        <div className="slider-wrapper">
+          <div className="slider-inner" ref={sliderRef}>
+            {testimonials.map((testimonial, idx) => (
+              <div className="testimonial-card" key={idx}>
+                <div className="quote">
                   <blockquote>"{testimonial.quote}"</blockquote>
-                  <div className="author-info">
-                    <h4>{testimonial.author}</h4>
-                    <p>{testimonial.position}</p>
-                    <span>{testimonial.company}</span>
+                </div>
+                <div className="author">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.author}
+                    className="author-img"
+                  />
+                  <div className="author-meta">
+                    <strong>{testimonial.author}</strong>
+                    <span>{testimonial.position} - {testimonial.company}</span>
                   </div>
                 </div>
               </div>
             ))}
-          </Slider>
-        </motion.div>
+          </div>
+        </div>
+
+ 
+        <div className="dots-container">
+          {testimonials.map((_, idx) => (
+            <span
+              key={idx}
+              className={`dot ${idx === currentIndex ? "active" : ""}`}
+              onClick={() => goToSlide(idx)}
+            ></span>
+          ))}
+        </div>
       </div>
     </section>
   );

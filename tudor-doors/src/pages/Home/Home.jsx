@@ -2,23 +2,22 @@ import React, { useRef, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+
+
 import { Navigate, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaCheckCircle, FaAward, FaUsersCog, FaLightbulb, FaShieldAlt, FaWhatsapp } from "react-icons/fa";
-import slide1 from "../../../src/assets/front.png";
-import slide2 from "../../../src/assets/front2.png";
-import slide3 from "../../../src/assets/front3.png";
+// import slide1 from "../../../src/assets/front.png";
+import slide1 from "../../assets/front.png";
+import slide2 from "../../assets/front2.png";
+import slide3 from "../../assets/front3.png";
 // profile images for client voices
-import cc from "../../../src/assets/pivit.png";
-import c1 from "../../../src/assets/woodd.jpg";
-import c2 from "../../../src/assets/ccc.png";
-import c3 from "../../../src/assets/glass.jpg";
-
-
-import profile1 from "../../../src/assets/female.png";
-import profile2 from "../../../src/assets/male.png";
-import profile3 from "../../../src/assets/male.png";
-import profile4 from "../../../src/assets/female2.png";
+import cc from "../../assets/pivit.png";
+import c1 from "../../assets/woodd.jpg";
+import c2 from "../../assets/ccc.png";
+import c3 from "../../assets/glass.jpg";
+import ClientVoices from "../../Components/ClientVoice/Client";
 
 import "./Home.css";
 
@@ -45,15 +44,7 @@ const itemVariants = {
 };
 
 function Home() {
-  const navigate = useNavigate();
-  const clientSliderRef = useRef(null);
-
-  useEffect(() => {
-    // ensure react-slick starts when mounted (helpful if inside animated containers)
-    if (clientSliderRef.current && typeof clientSliderRef.current.slickPlay === "function") {
-      try { clientSliderRef.current.slickPlay(); } catch (e) { /* noop */ }
-    }
-  }, []);
+  
   const settings = {
     dots: true,
     infinite: true,
@@ -92,52 +83,9 @@ function Home() {
   const whatsappText = encodeURIComponent("Hi, My name is----I saw your site and would like to ask about your services.");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappText}`;
 
-  // add custom arrows and updated clientSettings (replace the existing clientSettings block)
-  const PrevArrow = ({ onClick }) => (
-    <button className="slick-arrow custom-prev" onClick={onClick} aria-label="Previous">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </button>
-  );
-  const NextArrow = ({ onClick }) => (
-    <button className="slick-arrow custom-next" onClick={onClick} aria-label="Next">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </button>
-  );
 
-  const clientSettings = {
-    dots: true,
-    infinite: true,
-    speed: 600,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: "160px",     // adjust for big center card
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4500,
-    pauseOnHover: false,
-    accessibility: true,
-    prevArrow: <PrevArrow />,
-    nextArrow: <NextArrow />,
-    responsive: [
-      { breakpoint: 1200, settings: { slidesToShow: 3, centerPadding: "100px" } },
-      { breakpoint: 900, settings: { slidesToShow: 1, centerPadding: "40px", arrows: false } },
-      { breakpoint: 480, settings: { slidesToShow: 1, centerPadding: "20px", arrows: false } }
-    ]
-  };
 
-  const testimonials = [
-    { quote: "Your doors elevated our entire project. Reliable, durable, and premium.", author: "Mary Onuoha", position: "Supervisor ", company: "Octo5 Holdings", image: profile4 },
-    { quote: "These doors added luxury and elegance to our hotel rooms. Zero complaints, only praise", author: "Abimbola Opeyemi", position: "Contractor", company: "Adron Homes", image: profile1 },
-    { quote: "Our clients were impressed. Installation was smooth and quality is top-notch.", author: "Silas Sehoole", position: "Structural Engineer", company: "Mixta Africa", image: profile2 },
-    { quote: "Strong, stylish, and secure. The perfect touch needed for our facility upgrade.", author: "Yemi Shola", position: "Architect", company: "VAVA Furniture", image: profile3 },
-    { quote: "Thank you TDL! I feel absolutely safe and secure in my new home, the beauty of the doors is also a plus", author: "Christianna Mbachu", position: "New Home Owner", image: profile3 }
 
-  ];
 
   return (<>
     <section className="hero-section">
@@ -205,46 +153,7 @@ function Home() {
         </motion.div>
       ))}</div>
     </section>
-
-    {/* --- CLIENT VOICES (updated design) --- */}
-    <section className="client-voices">
-      <div className="client-container">
-        <motion.div className="client-header" initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="eyebrow">TESTIMONIALS</p>
-          <h2>What Our Client's Say!</h2>
-        </motion.div>
-
-        <motion.div className="client-slider" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
-          <Slider ref={clientSliderRef} {...clientSettings}>
-            {testimonials.map((t, idx) => (
-              <div key={idx} className="testimonial-slide">
-                <article className="cv-card" role="group" aria-roledescription="slide" aria-label={`testimonial ${idx + 1}`}>
-                  <div className="cv-quote">
-                    <span className="quote-mark" aria-hidden>
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                        <path d="M7.17 6A4.993 4.993 0 0 0 2 11v6h7v-6H5.5a2.5 2.5 0 0 1 2.5-2.5V6H7.17zM17.17 6A4.993 4.993 0 0 0 12 11v6h7v-6h-3.5a2.5 2.5 0 0 1 2.5-2.5V6h-1.83z" fill="currentColor"/>
-                      </svg>
-                    </span>
-                    <blockquote>“{t.quote}”</blockquote>
-                  </div>
-
-                  <div className="cv-footer">
-                    <div className="cv-author">
-                      <img src={t.image} alt={t.author} />
-                      <div className="author-meta">
-                        <strong>{t.author}</strong>
-                        <span className="meta-sub">{t.position} - {t.company}</span>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            ))}
-          </Slider>
-        </motion.div>
-      </div>
-    </section>
-
+    <ClientVoices />
     {/* WhatsApp floating button */}
     <motion.a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" className="whatsapp-fab" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 260, damping: 20 }}><FaWhatsapp /></motion.a>
   </>);
